@@ -54,3 +54,16 @@ export function getAllCategories(): string[] {
   const categories = new Set(posts.map((post) => post.category));
   return Array.from(categories);
 }
+
+
+export const savePost = async (fileName: string, data: string): Promise<{ success: boolean; msg?: string }> => {
+    const filePath = path.join(process.cwd(), 'posts', fileName)
+    try {
+      await fs.writeFileSync(filePath, data, 'utf-8')
+      return { success: true }
+    } catch (error) {
+      console.error('Error saving post:', error)
+      return { success: false, msg: error instanceof Error ? error.message : String(error) }
+    }
+  }
+  

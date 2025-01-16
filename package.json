@@ -7,14 +7,31 @@
     "url": "https://github.com/GrgSuman/next-md-blog.git"
   },
   "homepage": "https://github.com/GrgSuman/next-md-blog.git",
-  "main": "dist/index.js",
-  "module": "dist/index.mjs",
-  "types": "dist/index.d.ts",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "require": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./client": {
+      "import": "./dist/client/index.js",
+      "require": "./dist/client/index.js",
+      "types": "./dist/client/index.d.ts"
+    },
+    "./server": {
+      "import": "./dist/server/index.js",
+      "require": "./dist/server/index.js",
+      "types": "./dist/server/index.d.ts"
+    }
+  },
   "files": [
     "dist"
   ],
   "scripts": {
-    "build": "tsup src/index.ts --format cjs,esm --dts --target node14",
+    "build": "tsc",
     "typecheck": "tsc --noEmit"
   },
   "keywords": [
@@ -28,14 +45,15 @@
     "gray-matter": "^4.0.3",
     "jodit-react": "^4.1.2",
     "remark": "^15.0.1",
-    "remark-html": "^16.0.1"
+    "remark-html": "^16.0.1",
+    "turndown": "^7.2.0"
   },
   "devDependencies": {
     "@types/node": "^14.18.63",
     "@types/react": "^19.0.7",
+    "@types/turndown": "^5.0.5",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "tsup": "^8.3.5",
     "typescript": "^5.7.3"
   }
 }

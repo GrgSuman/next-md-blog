@@ -1,22 +1,23 @@
 {
-    "compilerOptions": {
-      "target": "ES2018",
-      "module": "ESNext",
-      "lib": ["ES2018", "ESNext", "DOM"],
-      "jsx": "react",
-      "moduleResolution": "node",
-      "strict": true,
-      "esModuleInterop": true,
-      "skipLibCheck": true,
-      "outDir": "./dist",
-      "baseUrl": "./src",
-      "declaration": true,
-      "declarationMap": true,
-      "sourceMap": true,
-      "forceConsistentCasingInFileNames": true,
-      "resolveJsonModule": true,
-      "types": ["node"]  // Add this line
-    },
-    "include": ["src/**/*"],
-    "exclude": ["node_modules", "dist"]
-  }
+  "compilerOptions": {
+    "target": "ES2018",
+    "module": "ESNext",
+    "lib": ["ES2018", "ESNext", "DOM"],
+    "jsx": "react",
+    "moduleResolution": "node",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "outDir": "./dist",
+    "baseUrl": "./src",
+    "declaration": true,
+    "declarationMap": true,
+    "sourceMap": true,
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true,
+    "types": ["node"]
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "dist"]
+}
+
