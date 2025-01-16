@@ -1,0 +1,39 @@
+# Source files
+src/
+
+# TypeScript config
+tsconfig.json
+
+# Package manager lock file
+package-lock.json
+
+# Development dependencies
+node_modules/
+
+# Git related
+.git/
+.gitignore
+
+# Logs
+*.log
+npm-debug.log*
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# IDE specific files
+.vscode/
+.idea/
+
+# Temporary files
+*.tmp
+*.temp
+
+# Test files (if you have any)
+__tests__/
+*.test.js
+*.spec.js
+
+# Any other development or build-related files
+*.tsbuildinfo
