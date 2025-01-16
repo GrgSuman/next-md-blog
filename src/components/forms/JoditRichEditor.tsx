@@ -1,10 +1,8 @@
 'use client'
 /* Imports */
-import React, {useRef, useMemo,forwardRef } from 'react';
-import dynamic from 'next/dynamic';
+import React, {useRef, useMemo } from 'react';
 
-/* Using dynamic import of Jodit component as it can't render in server side*/
-const JoditEditor = dynamic(() => import("jodit-react"), { ssr: false });
+import JoditEditor from 'jodit-react';
 
 /*functions*/
 export default function JoditRichEditor ({content,setContent}:any) {
