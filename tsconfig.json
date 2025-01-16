@@ -3,6 +3,7 @@
       "target": "ES2018",
       "module": "ESNext",
       "lib": ["ES2018", "ESNext", "DOM"],
+      "jsx": "react",
       "moduleResolution": "node",
       "strict": true,
       "esModuleInterop": true,
