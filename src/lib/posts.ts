@@ -34,18 +34,24 @@ export function getSortedPostsData(): PostData[] {
 }
 
 // Get specific post data (content + metadata)
-export async function getPostData(id: string): Promise<{ id: string; contentHtml: string; date: string; title: string; category: string }> {
-  const fullPath = path.join(postsDirectory, `${id}.md`);
-  const fileContents = fs.readFileSync(fullPath, 'utf8');
-  const matterResult = matter(fileContents);
-  const processedContent = await remark().use(html).process(matterResult.content);
-  const contentHtml = processedContent.toString();
+export async function getPostData(id: string) {
+  const fullPath = path.join(postsDirectory, `${id}.md`)
+  
+  // Check if file exists
+  if (!fs.existsSync(fullPath)) {
+    return null
+  }
+
+  const fileContents = fs.readFileSync(fullPath, 'utf8')
+  const matterResult = matter(fileContents)
+  const processedContent = await remark().use(html).process(matterResult.content)
+  const contentHtml = processedContent.toString()
 
   return {
     id,
     contentHtml,
     ...(matterResult.data as { date: string; title: string; category: string })
-  };
+  }
 }
 
 // Get all unique categories from posts
