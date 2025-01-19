@@ -1,1 +1,1 @@
-export { getSortedPostsData, getPostData, getAllCategories, savePost } from '../lib/posts';
+export { getSortedPostsData, getPostData, getAllCategories, getPostsByCategory, savePost } from '../lib/posts';

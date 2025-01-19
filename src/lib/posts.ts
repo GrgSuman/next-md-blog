@@ -2,21 +2,12 @@
 import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
-import { remark } from 'remark';
-import html from 'remark-html';
 
+// Directory where posts are stored
 const postsDirectory = path.join(process.cwd(), 'posts');
 
-// Define types for the post metadata
-interface PostData {
-  id: string;
-  date: string;
-  title: string;
-  category: string;
-}
-
-// Get sorted post data with metadata
-export function getSortedPostsData(): PostData[] {
+// Get sorted post data with all metadata
+export function getSortedPostsData() {
   const fileNames = fs.readdirSync(postsDirectory);
   const allPostsData = fileNames.map((fileName:string) => {
     const id = fileName.replace(/\.md$/, '');
@@ -30,10 +21,10 @@ export function getSortedPostsData(): PostData[] {
     };
   });
 
-  return allPostsData.sort((a: PostData, b: PostData) => (a.date < b.date ? 1 : -1));
+  return allPostsData.sort((a, b) => (a.date < b.date ? 1 : -1));
 }
 
-// Get specific post data (content + metadata)
+// Get specific post data (metdata + content)
 export async function getPostData(id: string) {
   const fullPath = path.join(postsDirectory, `${id}.md`)
   
@@ -44,8 +35,7 @@ export async function getPostData(id: string) {
 
   const fileContents = fs.readFileSync(fullPath, 'utf8')
   const matterResult = matter(fileContents)
-  const processedContent = await remark().use(html).process(matterResult.content)
-  const contentHtml = processedContent.toString()
+  const contentHtml = matterResult.content
 
   return {
     id,
@@ -61,15 +51,30 @@ export function getAllCategories(): string[] {
   return Array.from(categories);
 }
 
+//get all posts from a category
+export function getPostsByCategory(category: string) {
+  const posts = getSortedPostsData();
+  return posts.filter((post) => post.category === category);
+}
 
+// Save post to file
 export const savePost = async (fileName: string, data: string): Promise<{ success: boolean; msg?: string }> => {
-    const filePath = path.join(process.cwd(), 'posts', fileName)
-    try {
-      await fs.writeFileSync(filePath, data, 'utf-8')
-      return { success: true }
-    } catch (error) {
-      console.error('Error saving post:', error)
-      return { success: false, msg: error instanceof Error ? error.message : String(error) }
+  const filePath = path.join(postsDirectory, fileName)
+  try {
+    // Check if the 'posts' directory exists, create it if it doesn't
+    if (!fs.existsSync(postsDirectory)) {
+      fs.mkdirSync(postsDirectory, { recursive: true })
     }
+    // Write the file
+    await fs.promises.writeFile(filePath, data, 'utf-8')
+    return { 
+      success: true
+    }
+  } catch (error) {
+    console.error('Error saving post:', error)
+    return { 
+      success: false, msg: error instanceof Error ? error.message : String(error) 
+    }
+  }
   }
   
