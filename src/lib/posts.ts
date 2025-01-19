@@ -40,7 +40,7 @@ export async function getPostData(id: string) {
   return {
     id,
     contentHtml,
-    ...(matterResult.data as { date: string; title: string; category: string })
+    ...matterResult.data 
   }
 }
 
@@ -54,7 +54,7 @@ export function getAllCategories(): string[] {
 //get all posts from a category
 export function getPostsByCategory(category: string) {
   const posts = getSortedPostsData();
-  return posts.filter((post) => post.category === category);
+  return posts.filter((post) => post.category.toLowerCase === category.toLowerCase);
 }
 
 // Save post to file
